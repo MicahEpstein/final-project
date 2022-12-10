@@ -6,7 +6,7 @@ import {fetchAllData} from './fetch_chart_data.js';
 fetchAllData();
 
 function fetchData() {
-  fetch(`./data/data.csv`)
+  fetch(`./data/311data.csv`)
     .then(resp => resp.text())
     .then(data => {
       const dataset = Papa.parse(data, { header: true });
@@ -48,10 +48,10 @@ fetchData();
 let minScroll = 0;
 let maxScroll = 100;
 let minInt = 0;
-let maxInt = 640;
+let maxInt = 960;
 //let minMs = 1666843200000;
 //let maxMs = 1667707200000;
-//let proportion = (maxMs - minMs)/(maxScroll-minScroll);
+let proportion = (maxMs - minMs)/(maxScroll-minScroll);
 let proportion2 = (maxInt - minInt)/(maxScroll-minScroll);
 
 /*function scrollToDate(scrolled){
@@ -100,17 +100,8 @@ function addToMap(dataToAdd) {
     const dataFeature = make311Feature(dataToAdd);
     //console.log(dataFeature.properties["parsed-interval"]);
     console.log(dataFeature);
-    if (dataFeature.properties.data["categories"] === "information"){
-      map.infoLayer.addData(dataFeature);
-    } else if (dataFeature.properties.data["categories"] === "quality of life"){
-      map.qolLayer.addData(dataFeature);
-    } else if (dataFeature.properties.data["categories"] === "streets"){
-      map.streetsLayer.addData(dataFeature);
-    } else if (dataFeature.properties.data["categories"] === "complaint"){
-      map.complaintLayer.addData(dataFeature);
-    } else if (dataFeature.properties.data["categories"] === "miscellaneous"){
-      map.miscLayer.addData(dataFeature);   
-  }}
+    map.dataLayer.addData(dataFeature);
+  }
   
   window.onscroll = function () {
     progressBarScroll();
