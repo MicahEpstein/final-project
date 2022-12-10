@@ -1,6 +1,9 @@
 
 //import data and functions
-import { initializeMap} from './map.js';
+import {initializeMap} from './map.js';
+import {fetchAllData} from './fetch_chart_data.js';
+
+fetchAllData();    
 
 function fetchData() {
   fetch(`./data/data.csv`)
@@ -18,7 +21,7 @@ function fetchData() {
           cleandata.push(element);
         }
       }
-      window.dataset = cleandata;
+        
       //creating a map from parsedInterval to an array of indices (i) in cleandata
       //this needs to map from simpleInterval instead
       const dataDic = {};
@@ -91,6 +94,8 @@ function progressBarScroll() {
     };
   }
 
+
+
 function addToMap(dataToAdd) {
     const dataFeature = make311Feature(dataToAdd);
     //console.log(dataFeature.properties["parsed-interval"]);
@@ -110,98 +115,29 @@ function addToMap(dataToAdd) {
   window.onscroll = function () {
     progressBarScroll();
   };
-
-
-
   
   var options = {
     series: [
     {
-      name: 'South',
-      data: [
-        {
-          x: "02-10-2017 GMT",
-          y: 34
-        },
-        {
-          x: "02-11-2017 GMT",
-          y: 43
-        },
-        {
-          x: "02-12-2017 GMT",
-          y: 31
-        },
-        {
-          x: "02-13-2017 GMT",
-          y: 43
-        },
-        {
-          x: "02-14-2017 GMT",
-          y: 33
-        },
-        {
-          x: "02-15-2017 GMT",
-          y: 52
-        }
+      name: 'Complaints',
+      data: [window.complaintData
       ]
     },
     {
-      name: 'North',
-      data: [
-        {
-          x: "02-10-2017 GMT",
-          y: 34
-        },
-        {
-          x: "02-11-2017 GMT",
-          y: 43
-        },
-        {
-          x: "02-12-2017 GMT",
-          y: 31
-        },
-        {
-          x: "02-13-2017 GMT",
-          y: 43
-        },
-        {
-          x: "02-14-2017 GMT",
-          y: 33
-        },
-        {
-          x: "02-15-2017 GMT",
-          y: 52
-        }
-      ]
+      name: 'Information',
+      data: [window.infoData]
     },
     {
-      name: 'Central',
-      data: [
-        {
-          x: "02-10-2017 GMT",
-          y: 34
-        },
-        {
-          x: "02-11-2017 GMT",
-          y: 43
-        },
-        {
-          x: "02-12-2017 GMT",
-          y: 31
-        },
-        {
-          x: "02-13-2017 GMT",
-          y: 43
-        },
-        {
-          x: "02-14-2017 GMT",
-          y: 33
-        },
-        {
-          x: "02-15-2017 GMT",
-          y: 52
-        }
-      ]
+      name: 'Quality of Life',
+      data: [window.qolData]
+    },
+    {
+      name: 'Miscellaneous',
+      data: [window.miscData]
+    },
+    {
+      name: 'Streets',
+      data: [window.streetsData]
     }
   ],
     chart: {
@@ -214,7 +150,7 @@ function addToMap(dataToAdd) {
       }
     },
   },
-  colors: ['#008FFB', '#00E396', '#CED4DC'],
+  colors: ['#f94e08', '#00c6fc', '#11ad7d', '#d3a112', '#f8f6a7'],
   dataLabels: {
     enabled: false
   },
@@ -238,4 +174,4 @@ function addToMap(dataToAdd) {
   };
 
   var chart = new ApexCharts(document.querySelector("#chart"), options);
-  chart.render();
+  //chart.render();
