@@ -4,7 +4,7 @@ function fetchComplaintData() {
       .then(data => {
         const complaintData = Papa.parse(data, { header: true });
         window.complaintData = complaintData;
-        //console.log(complaintData);
+        console.log(complaintData);
       });
     }
   
@@ -14,7 +14,7 @@ function fetchComplaintData() {
       .then(data => {
         const infoData = Papa.parse(data, { header: true });
         window.infoData = infoData;
-        //console.log(infoData);
+        console.log(infoData);
       });
   }
   
@@ -24,7 +24,7 @@ function fetchComplaintData() {
       .then(data => {
         const qolData = Papa.parse(data, { header: true });
         window.qolData = qolData;
-        //console.log(qolData);
+        console.log(qolData);
       });
   }
   
@@ -34,7 +34,7 @@ function fetchComplaintData() {
       .then(data => {
         const miscData = Papa.parse(data, { header: true });
         window.miscData = miscData;
-        //console.log(miscData);
+        console.log(miscData);
       });
   }
   
@@ -44,7 +44,7 @@ function fetchComplaintData() {
       .then(data => {
         const streetsData = Papa.parse(data, { header: true });
         window.streetsData = streetsData;
-        //console.log(streetsData);
+        console.log(streetsData);
       });
   }
   

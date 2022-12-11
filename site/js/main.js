@@ -3,7 +3,7 @@
 import {initializeMap} from './map.js';
 import {fetchAllData} from './fetch_chart_data.js';
 
-fetchAllData();
+fetchAllData();    
 
 function fetchData() {
   fetch(`./data/311data.csv`)
@@ -106,32 +106,29 @@ function addToMap(dataToAdd) {
   window.onscroll = function () {
     progressBarScroll();
   };
-
-  console.log(window.qolData);
-
   
-  function changeStructure (dataset){
-    for (const element of dataset){
-        return {
-          x: element['x'],
-          y: Number(element['y'])
-        }
-    };
-
-  };
-
- changeStructure(window.qolData.data);
-
-
   var options = {
     series: [
     {
       name: 'Complaints',
-      data: window.complaintData
+      data: [window.complaintData
+      ]
     },
     {
       name: 'Information',
-      data: window.infoData
+      data: [window.infoData]
+    },
+    {
+      name: 'Quality of Life',
+      data: [window.qolData]
+    },
+    {
+      name: 'Miscellaneous',
+      data: [window.miscData]
+    },
+    {
+      name: 'Streets',
+      data: [window.streetsData]
     }
   ],
     chart: {
@@ -168,4 +165,4 @@ function addToMap(dataToAdd) {
   };
 
   var chart = new ApexCharts(document.querySelector("#chart"), options);
-  chart.render();
+  //chart.render();
