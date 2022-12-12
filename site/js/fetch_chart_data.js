@@ -1,5 +1,5 @@
 function fetchComplaintData() {
-  fetch(`./data/complaint.csv`)
+  return fetch(`./data/complaint.csv`)
     .then(resp => resp.text())
     .then(data => {
       const complaintData = Papa.parse(data, { header: true });
@@ -9,7 +9,7 @@ function fetchComplaintData() {
 }
 
 function fetchInfoData() {
-  fetch(`./data/information.csv`)
+  return fetch(`./data/information.csv`)
     .then(resp => resp.text())
     .then(data => {
       const infoData = Papa.parse(data, { header: true });
@@ -19,7 +19,7 @@ function fetchInfoData() {
 }
 
 function fetchQOLData() {
-  fetch(`./data/lifequality.csv`)
+  return fetch(`./data/lifequality.csv`)
     .then(resp => resp.text())
     .then(data => {
       const qolData = Papa.parse(data, { header: true });
@@ -29,7 +29,7 @@ function fetchQOLData() {
 }
 
 function fetchMiscData() {
-  fetch(`./data/miscellaneous.csv`)
+  return fetch(`./data/miscellaneous.csv`)
     .then(resp => resp.text())
     .then(data => {
       const miscData = Papa.parse(data, { header: true });
@@ -39,7 +39,7 @@ function fetchMiscData() {
 }
 
 function fetchStreetsData() {
-  fetch(`./data/streets.csv`)
+  return fetch(`./data/streets.csv`)
     .then(resp => resp.text())
     .then(data => {
       const streetsData = Papa.parse(data, { header: true });
@@ -50,11 +50,13 @@ function fetchStreetsData() {
 
 
 function fetchAllData() {
-  fetchComplaintData();
-  fetchInfoData();
-  fetchQOLData();
-  fetchMiscData();
-  fetchStreetsData();
+  return Promise.all([
+    fetchComplaintData(),
+    fetchInfoData(),
+    fetchQOLData(),
+    fetchMiscData(),
+    fetchStreetsData(),
+  ]);
 };
 
 
