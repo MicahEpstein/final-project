@@ -23,6 +23,7 @@ fetchAllData()
               cleandata.push(element);
             }
           }
+          window.dataset = cleandata;
 
           //creating a map from parsedInterval to an array of indices (i) in cleandata
           //this needs to map from simpleInterval instead
